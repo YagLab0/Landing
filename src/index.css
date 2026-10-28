@@ -1,0 +1,104 @@
+@import "tailwindcss";
+
+/*
+  Paleta "Puna nocturna" — salar de noche, salmuera y cobre.
+  noche    #0A0D13  cielo de la Puna de noche — fondo base
+  salar    #10151E  superficie baja (secciones alternadas)
+  salina   #151C28  superficie elevada (paneles)
+  borde    #232D3F  hairlines
+  sal      #EEEBE0  blanco sal — texto principal
+  bruma    #9AA5B8  texto secundario
+  litio    #5BE3D4  teal-litio — acento principal
+  salmuera #1B8A90  poza de evaporación — acento profundo
+  cobre    #D08A4E  cobre cálido — acento secundario
+  Acentos por proyecto: senal #F5B301 (Jumin), terracota #D97A50 (Nomai)
+*/
+
+@theme {
+  --color-noche: #0a0d13;
+  --color-salar: #10151e;
+  --color-salina: #151c28;
+  --color-salina-2: #1a2230;
+  --color-borde: #232d3f;
+  --color-borde-2: #2e3a50;
+  --color-sal: #eeebe0;
+  --color-bruma: #9aa5b8;
+  --color-bruma-2: #6b7688;
+  --color-litio: #5be3d4;
+  --color-salmuera: #1b8a90;
+  --color-cobre: #d08a4e;
+  --color-senal: #f5b301;
+  --color-terra: #d97a50;
+
+  --font-display: "Saira Semi Condensed", "Arial Narrow", sans-serif;
+  --font-sans: "Saira", "Helvetica Neue", Arial, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, monospace;
+
+  --text-micro: 0.75rem;
+  --text-micro--line-height: 1.45;
+
+  --animate-pulse-soft: pulse-soft 3.2s ease-in-out infinite;
+  --animate-flow: flow 2.4s linear infinite;
+
+  @keyframes pulse-soft {
+    0%,
+    100% {
+      opacity: 0.35;
+    }
+    50% {
+      opacity: 1;
+    }
+  }
+  @keyframes flow {
+    to {
+      stroke-dashoffset: -24;
+    }
+  }
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 4.5rem;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+  }
+  body {
+    @apply bg-noche text-sal font-sans antialiased;
+    text-rendering: optimizeLegibility;
+  }
+  ::selection {
+    background: var(--color-litio);
+    color: var(--color-noche);
+  }
+  :focus-visible {
+    outline: 2px solid var(--color-litio);
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
+}
+
+@utility text-balance {
+  text-wrap: balance;
+}
+
+@utility text-pretty {
+  text-wrap: pretty;
+}
+
+/* Trama de corteza de sal: hexágonos apenas visibles */
+@utility trama-sal {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='56' height='97' viewBox='0 0 56 97'%3E%3Cpath d='M28 0l28 16.2v32.4L28 64.7 0 48.5V16.2z' fill='none' stroke='%23232d3f' stroke-width='1'/%3E%3Cpath d='M28 64.7l28 16.2-28 16.1L0 81z' fill='none' stroke='%23232d3f' stroke-width='1' opacity='.5'/%3E%3C/svg%3E");
+  background-size: 56px 97px;
+}
+
+/* Pozas de evaporación vistas desde arriba */
+@utility pozas {
+  background-image:
+    radial-gradient(42rem 26rem at 12% 108%, rgba(27, 138, 144, 0.22), transparent 62%),
+    radial-gradient(36rem 22rem at 88% 96%, rgba(91, 227, 212, 0.1), transparent 60%),
+    radial-gradient(30rem 20rem at 55% 122%, rgba(208, 138, 78, 0.09), transparent 55%);
+}
